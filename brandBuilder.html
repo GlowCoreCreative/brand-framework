@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Framework Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #2563eb;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #2563eb;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+  <div id="app"></div>
+
+  <script type="module">
+    import React, { useState } from 'https://esm.sh/react@18';
+    import ReactDOM from 'https://esm.sh/react-dom@18/client';
+
+    const Download = ({ size = 24 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+    );
+
+    const RefreshCw = ({ size = 24 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <polyline points="1 20 1 14 7 14"></polyline>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+      </svg>
+    );
+
+    const Send = ({ size = 24 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    );
+
+    function BrandFramework() {
+      const [responses, setResponses] = useState({});
+      const [isSubmitting, setIsSubmitting] = useState(false);
+      const [submitStatus, setSubmitStatus] = useState(null);
+      const [sliders, setSliders] = useState({
+        voiceTone: 50,
+        personality: 50,
+        formality: 50,
+        emotion: 50,
+        complexity: 50,
+        innovation: 50,
+        approachability: 50,
+        energy: 50
+      });
+      const [languageSliders, setLanguageSliders] = useState({
+        vocabulary: 50,
+        sentenceLength: 50,
+        technicality: 50,
+        storytelling: 50,
+        humor: 50,
+        directness: 50
+      });
+
+      const questions = [
+        {
+          section: "Brand Foundation",
+          items: [
+            { id: "name", type: "text", label: "Brand Name", placeholder: "What's your brand called?" },
+            { id: "tagline", type: "text", label: "Tagline (Optional)", placeholder: "A brief phrase that captures your essence" },
+            { id: "mission", type: "text", label: "Mission Statement", placeholder: "Why does your brand exist?" },
+            { id: "vision", type: "text", label: "Vision", placeholder: "Where do you want to be in 5-10 years?" },
+            { id: "values", type: "text", label: "Core Values (3-5)", placeholder: "What principles guide your brand? (comma separated)" }
+          ]
+        },
+        {
+          section: "Target Audience",
+          items: [
+            { id: "primaryAudience", type: "text", label: "Primary Audience", placeholder: "Who are you serving?" },
+            { id: "demographics", type: "text", label: "Demographics", placeholder: "Age, location, income, occupation, etc." },
+            { id: "psychographics", type: "text", label: "Psychographics", placeholder: "Values, interests, lifestyle, pain points" },
+            { id: "customerNeeds", type: "text", label: "Customer Needs", placeholder: "What problems are you solving?" }
+          ]
+        },
+        {
+          section: "Market Position",
+          items: [
+            { 
+              id: "category", 
+              type: "select", 
+              label: "Category/Industry", 
+              options: [
+                "Technology & Software",
+                "Healthcare & Wellness",
+                "Food & Beverage",
+                "Fashion & Apparel",
+                "Finance & Banking",
+                "Education & Training",
+                "Entertainment & Media",
+                "Real Estate & Construction",
+                "Professional Services",
+                "Retail & E-commerce",
+                "Travel & Hospitality",
+                "Waste",
+                "Other"
+              ]
+            },
+            { id: "categoryOther", type: "text", label: "If Other, specify:", placeholder: "Your industry", conditional: "category", conditionalValue: "Other" },
+            { id: "competitors", type: "text", label: "Key Competitors", placeholder: "Who else is in this space?" },
+            { id: "differentiation", type: "text", label: "What Makes You Different?", placeholder: "Your unique positioning" },
+            { id: "valueProposition", type: "text", label: "Value Proposition", placeholder: "Why should customers choose you?" }
+          ]
+        },
+        {
+          section: "Brand Personality",
+          items: [
+            { 
+              id: "archetype", 
+              type: "select", 
+              label: "Brand Archetype", 
+              options: [
+                "The Innocent (optimistic, pure, simple)",
+                "The Sage (wise, knowledgeable, thoughtful)",
+                "The Explorer (adventurous, independent, pioneering)",
+                "The Outlaw (rebellious, disruptive, revolutionary)",
+                "The Magician (transformative, visionary, charismatic)",
+                "The Hero (courageous, bold, inspirational)",
+                "The Lover (passionate, intimate, sensual)",
+                "The Jester (playful, humorous, fun-loving)",
+                "The Everyman (relatable, down-to-earth, friendly)",
+                "The Caregiver (nurturing, compassionate, generous)",
+                "The Ruler (authoritative, powerful, controlling)",
+                "The Creator (innovative, artistic, imaginative)",
+                "Other/Combination"
+              ]
+            },
+            { id: "archetypeOther", type: "text", label: "If Other, describe:", placeholder: "Your archetype combination", conditional: "archetype", conditionalValue: "Other/Combination" },
+            { id: "humanTraits", type: "text", label: "If Your Brand Was a Person", placeholder: "Describe their personality" },
+            { id: "avoidTraits", type: "text", label: "What You're NOT", placeholder: "Traits to avoid" }
+          ]
+        },
+        {
+          section: "Visual Identity",
+          items: [
+            { id: "colorPreferences", type: "text", label: "Color Direction", placeholder: "Any color preferences or meanings?" },
+            { 
+              id: "visualStyle", 
+              type: "visual-select", 
+              label: "Visual Style",
+              options: [
+                { 
+                  value: "Minimalist", 
+                  description: "Clean lines, lots of whitespace, simple typography",
+                  example: "Apple, Muji, Airbnb"
+                },
+                { 
+                  value: "Bold & Vibrant", 
+                  description: "Bright colors, strong contrasts, eye-catching",
+                  example: "Spotify, YouTube, Lyft"
+                },
+                { 
+                  value: "Elegant & Sophisticated", 
+                  description: "Refined, luxury feel, classic typography",
+                  example: "Chanel, Rolex, Mercedes-Benz"
+                },
+                { 
+                  value: "Playful & Fun", 
+                  description: "Quirky, colorful, whimsical elements",
+                  example: "Mailchimp, Duolingo, Ben & Jerry's"
+                },
+                { 
+                  value: "Rugged & Industrial", 
+                  description: "Raw, textured, authentic, masculine",
+                  example: "Carhartt, Yeti, Patagonia"
+                },
+                { 
+                  value: "Modern & Tech-Forward", 
+                  description: "Gradients, glassmorphism, futuristic",
+                  example: "Stripe, Figma, Notion"
+                },
+                { 
+                  value: "Organic & Natural", 
+                  description: "Earthy tones, organic shapes, sustainable feel",
+                  example: "Whole Foods, The Body Shop, Allbirds"
+                },
+                { 
+                  value: "Other", 
+                  description: "Something unique to your brand"
+                }
+              ]
+            },
+            { id: "visualStyleOther", type: "text", label: "If Other, describe:", placeholder: "Your visual style", conditional: "visualStyle", conditionalValue: "Other" },
+            { 
+              id: "imagery", 
+              type: "select", 
+              label: "Imagery Direction", 
+              options: [
+                "Photography (realistic, human-centered)",
+                "Illustrations (custom, artistic)",
+                "Abstract Graphics (shapes, patterns)",
+                "3D Renders (modern, digital)",
+                "Mixed Media (combination approach)",
+                "Other"
+              ]
+            },
+            { id: "imageryOther", type: "text", label: "If Other, specify:", placeholder: "Your imagery style", conditional: "imagery", conditionalValue: "Other" }
+          ]
+        },
+        {
+          section: "Messaging",
+          items: [
+            { id: "keyMessages", type: "text", label: "Key Messages", placeholder: "Top 3 things you want to communicate" },
+            { id: "avoidLanguage", type: "text", label: "Words/Phrases to Avoid", placeholder: "Any jargon or terms you don't want to use?" }
+          ]
+        }
+      ];
+
+      const brandVoiceSliders = [
+        { id: "voiceTone", label: "Voice Tone", left: "Soft & Gentle", right: "Punchy & Bold" },
+        { id: "personality", label: "Personality", left: "Serious & Professional", right: "Playful & Witty" },
+        { id: "formality", label: "Formality", left: "Formal & Polished", right: "Casual & Conversational" },
+        { id: "emotion", label: "Emotional Appeal", left: "Logical & Rational", right: "Emotional & Heartfelt" },
+        { id: "complexity", label: "Complexity", left: "Simple & Clear", right: "Sophisticated & Nuanced" },
+        { id: "innovation", label: "Innovation", left: "Traditional & Classic", right: "Modern & Cutting-Edge" },
+        { id: "approachability", label: "Approachability", left: "Exclusive & Premium", right: "Accessible & Inclusive" },
+        { id: "energy", label: "Energy Level", left: "Calm & Measured", right: "Energetic & Dynamic" }
+      ];
+
+      const languageStyleSliders = [
+        { id: "vocabulary", label: "Vocabulary", left: "Everyday Words", right: "Industry Jargon" },
+        { id: "sentenceLength", label: "Sentence Length", left: "Short & Snappy", right: "Long & Flowing" },
+        { id: "technicality", label: "Technicality", left: "Layman's Terms", right: "Technical & Precise" },
+        { id: "storytelling", label: "Storytelling", left: "Facts & Data", right: "Stories & Narratives" },
+        { id: "humor", label: "Humor", left: "Serious & Straight", right: "Witty & Humorous" },
+        { id: "directness", label: "Directness", left: "Direct & Clear", right: "Suggestive & Subtle" }
+      ];
+
+      const handleInputChange = (id, value) => {
+        setResponses(prev => ({ ...prev, [id]: value }));
+      };
+
+      const handleSliderChange = (id, value) => {
+        setSliders(prev => ({ ...prev, [id]: parseInt(value) }));
+      };
+
+      const handleLanguageSliderChange = (id, value) => {
+        setLanguageSliders(prev => ({ ...prev, [id]: parseInt(value) }));
+      };
+
+      const getSliderPosition = (value) => {
+        if (value < 25) return "Strongly Left";
+        if (value < 45) return "Moderately Left";
+        if (value < 55) return "Balanced";
+        if (value < 75) return "Moderately Right";
+        return "Strongly Right";
+      };
+
+      const shouldShowField = (item) => {
+        if (!item.conditional) return true;
+        return responses[item.conditional] === item.conditionalValue;
+      };
+
+      const exportBrand = () => {
+        const brandData = {
+          responses,
+          brandVoiceSliders: sliders,
+          languageStyleSliders: languageSliders,
+          timestamp: new Date().toISOString()
+        };
+        
+        const blob = new Blob([JSON.stringify(brandData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `brand-framework-${responses.name || 'untitled'}.json`;
+        a.click();
+      };
+
+      const submitBrand = async () => {
+        if (!responses.name) {
+          setSubmitStatus({ type: 'error', message: 'Please enter a brand name before submitting.' });
+          return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        const formatSliderValue = (value) => {
+          if (value < 25) return "Strongly Left";
+          if (value < 45) return "Moderately Left";
+          if (value < 55) return "Balanced";
+          if (value < 75) return "Moderately Right";
+          return "Strongly Right";
+        };
+
+        const emailData = {
+          brand_name: responses.name || 'Untitled',
+          submission_date: new Date().toLocaleString(),
+          
+          foundation: `
+Brand Name: ${responses.name || 'N/A'}
+Tagline: ${responses.tagline || 'N/A'}
+Mission: ${responses.mission || 'N/A'}
+Vision: ${responses.vision || 'N/A'}
+Core Values: ${responses.values || 'N/A'}`,
+
+          audience: `
+Primary Audience: ${responses.primaryAudience || 'N/A'}
+Demographics: ${responses.demographics || 'N/A'}
+Psychographics: ${responses.psychographics || 'N/A'}
+Customer Needs: ${responses.customerNeeds || 'N/A'}`,
+
+          market: `
+Category: ${responses.category || 'N/A'}${responses.categoryOther ? ` (${responses.categoryOther})` : ''}
+Competitors: ${responses.competitors || 'N/A'}
+Differentiation: ${responses.differentiation || 'N/A'}
+Value Proposition: ${responses.valueProposition || 'N/A'}`,
+
+          personality: `
+Archetype: ${responses.archetype || 'N/A'}${responses.archetypeOther ? ` (${responses.archetypeOther})` : ''}
+Human Traits: ${responses.humanTraits || 'N/A'}
+Avoid Traits: ${responses.avoidTraits || 'N/A'}`,
+
+          visual: `
+Color Direction: ${responses.colorPreferences || 'N/A'}
+Visual Style: ${responses.visualStyle || 'N/A'}${responses.visualStyleOther ? ` (${responses.visualStyleOther})` : ''}
+Imagery: ${responses.imagery || 'N/A'}${responses.imageryOther ? ` (${responses.imageryOther})` : ''}`,
+
+          messaging: `
+Key Messages: ${responses.keyMessages || 'N/A'}
+Avoid Language: ${responses.avoidLanguage || 'N/A'}`,
+
+          brand_voice: `
+Voice Tone: ${formatSliderValue(sliders.voiceTone)} (Soft & Gentle ← ${sliders.voiceTone} → Punchy & Bold)
+Personality: ${formatSliderValue(sliders.personality)} (Serious & Professional ← ${sliders.personality} → Playful & Witty)
+Formality: ${formatSliderValue(sliders.formality)} (Formal & Polished ← ${sliders.formality} → Casual & Conversational)
+Emotional Appeal: ${formatSliderValue(sliders.emotion)} (Logical & Rational ← ${sliders.emotion} → Emotional & Heartfelt)
+Complexity: ${formatSliderValue(sliders.complexity)} (Simple & Clear ← ${sliders.complexity} → Sophisticated & Nuanced)
+Innovation: ${formatSliderValue(sliders.innovation)} (Traditional & Classic ← ${sliders.innovation} → Modern & Cutting-Edge)
+Approachability: ${formatSliderValue(sliders.approachability)} (Exclusive & Premium ← ${sliders.approachability} → Accessible & Inclusive)
+Energy Level: ${formatSliderValue(sliders.energy)} (Calm & Measured ← ${sliders.energy} → Energetic & Dynamic)`,
+
+          language_style: `
+Vocabulary: ${formatSliderValue(languageSliders.vocabulary)} (Everyday Words ← ${languageSliders.vocabulary} → Industry Jargon)
+Sentence Length: ${formatSliderValue(languageSliders.sentenceLength)} (Short & Snappy ← ${languageSliders.sentenceLength} → Long & Flowing)
+Technicality: ${formatSliderValue(languageSliders.technicality)} (Layman's Terms ← ${languageSliders.technicality} → Technical & Precise)
+Storytelling: ${formatSliderValue(languageSliders.storytelling)} (Facts & Data ← ${languageSliders.storytelling} → Stories & Narratives)
+Humor: ${formatSliderValue(languageSliders.humor)} (Serious & Straight ← ${languageSliders.humor} → Witty & Humorous)
+Directness: ${formatSliderValue(languageSliders.directness)} (Direct & Clear ← ${languageSliders.directness} → Suggestive & Subtle)`
+        };
+
+        try {
+          const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              service_id: 'service_dg5e7ka',
+              template_id: 'template_h1pz9g3',
+              user_id: 'f1khU9n23hpADDU7G',
+              template_params: emailData
+            })
+          });
+
+          if (response.ok) {
+            setSubmitStatus({ 
+              type: 'success', 
+              message: 'Brand framework submitted successfully! Thank you.' 
+            });
+          } else {
+            throw new Error('Failed to send');
+          }
+        } catch (error) {
+          setSubmitStatus({ 
+            type: 'error', 
+            message: 'Failed to submit. Please try again or download and email the file.' 
+          });
+          console.error('EmailJS error:', error);
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+
+      const resetForm = () => {
+        setResponses({});
+        setSubmitStatus(null);
+        setSliders({
+          voiceTone: 50,
+          personality: 50,
+          formality: 50,
+          emotion: 50,
+          complexity: 50,
+          innovation: 50,
+          approachability: 50,
+          energy: 50
+        });
+        setLanguageSliders({
+          vocabulary: 50,
+          sentenceLength: 50,
+          technicality: 50,
+          storytelling: 50,
+          humor: 50,
+          directness: 50
+        });
+      };
+
+      return React.createElement('div', { className: 'max-w-4xl mx-auto' },
+        React.createElement('div', { className: 'bg-white rounded-2xl shadow-xl p-8 mb-6' },
+          React.createElement('div', { className: 'flex justify-between items-start mb-6' },
+            React.createElement('div', null,
+              React.createElement('h1', { className: 'text-4xl font-bold text-slate-900 mb-2' }, 'Brand Framework Builder'),
+              React.createElement('p', { className: 'text-slate-600' }, 'Complete this framework to define your brand identity')
+            ),
+            React.createElement('div', { className: 'flex gap-2' },
+              React.createElement('button', {
+                onClick: submitBrand,
+                disabled: isSubmitting,
+                className: 'flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed'
+              },
+                React.createElement(Send, { size: 18 }),
+                isSubmitting ? 'Submitting...' : 'Submit'
+              ),
+              React.createElement('button', {
+                onClick: exportBrand,
+                className: 'flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition'
+              },
+                React.createElement(Download, { size: 18 }),
+                'Export'
+              ),
+              React.createElement('button', {
+                onClick: resetForm,
+                className: 'flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition'
+              },
+                React.createElement(RefreshCw, { size: 18 }),
+                'Reset'
+              )
+            )
+          ),
+
+          submitStatus && React.createElement('div', {
+            className: `mb-6 p-4 rounded-lg ${
+              submitStatus.type === 'success' 
+                ? 'bg-green-50 border border-green-200 text-green-800' 
+                : 'bg-red-50 border border-red-200 text-red-800'
+            }`
+          }, submitStatus.message),
+
+          questions.map((section, idx) =>
+            React.createElement('div', { key: idx, className: 'mb-10' },
+              React.createElement('h2', { className: 'text-2xl font-bold text-slate-800 mb-4 pb-2 border-b-2 border-blue-200' },
+                section.section
+              ),
+              React.createElement('div', { className: 'space-y-4' },
+                section.items.map((item) => {
+                  if (!shouldShowField(item)) return null;
+                  
+                  if (item.type === "select") {
+                    return React.createElement('div', { key: item.id },
+                      React.createElement('label', { className: 'block text-sm font-semibold text-slate-700 mb-2' }, item.label),
+                      React.createElement('select', {
+                        value: responses[item.id] || '',
+                        onChange: (e) => handleInputChange(item.id, e.target.value),
+                        className: 'w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                      },
+                        React.createElement('option', { value: '' }, 'Select an option...'),
+                        item.options.map((option) =>
+                          React.createElement('option', { key: option, value: option }, option)
+                        )
+                      )
+                    );
+                  }
+
+                  if (item.type === "visual-select") {
+                    return React.createElement('div', { key: item.id },
+                      React.createElement('label', { className: 'block text-sm font-semibold text-slate-700 mb-3' }, item.label),
+                      React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-3' },
+                        item.options.map((option) =>
+                          React.createElement('div', {
+                            key: option.value,
+                            onClick: () => handleInputChange(item.id, option.value),
+                            className: `p-4 border-2 rounded-lg cursor-pointer transition ${
+                              responses[item.id] === option.value
+                                ? 'border-blue-500 bg-blue-50'
+                                : 'border-slate-300 hover:border-slate-400'
+                            }`
+                          },
+                            React.createElement('div', { className: 'font-semibold text-slate-800 mb-1' }, option.value),
+                            React.createElement('div', { className: 'text-sm text-slate-600 mb-2' }, option.description),
+                            option.example && React.createElement('div', { className: 'text-xs text-slate-500 italic' }, 'Examples: ' + option.example)
+                          )
+                        )
+                      )
+                    );
+                  }
+
+                  return React.createElement('div', { key: item.id },
+                    React.createElement('label', { className: 'block text-sm font-semibold text-slate-700 mb-2' }, item.label),
+                    React.createElement('textarea', {
+                      value: responses[item.id] || '',
+                      onChange: (e) => handleInputChange(item.id, e.target.value),
+                      placeholder: item.placeholder,
+                      className: 'w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none',
+                      rows: 2
+                    })
+                  );
+                })
+              )
+            )
+          ),
+
+          React.createElement('div', { className: 'mb-10' },
+            React.createElement('h2', { className: 'text-2xl font-bold text-slate-800 mb-4 pb-2 border-b-2 border-blue-200' },
+              'Brand Voice Spectrum'
+            ),
+            React.createElement('p', { className: 'text-slate-600 mb-6' }, 'Move the sliders to define your brand\'s voice and personality'),
+            React.createElement('div', { className: 'space-y-6' },
+              brandVoiceSliders.map((spec) =>
+                React.createElement('div', { key: spec.id, className: 'bg-slate-50 p-4 rounded-lg' },
+                  React.createElement('div', { className: 'flex justify-between items-center mb-2' },
+                    React.createElement('span', { className: 'font-semibold text-slate-800' }, spec.label),
+                    React.createElement('span', { className: 'text-sm text-slate-600 bg-white px-3 py-1 rounded-full' },
+                      getSliderPosition(sliders[spec.id])
+                    )
+                  ),
+                  React.createElement('div', { className: 'flex items-center gap-4' },
+                    React.createElement('span', { className: 'text-xs text-slate-600 w-32 text-right' }, spec.left),
+                    React.createElement('input', {
+                      type: 'range',
+                      min: '0',
+                      max: '100',
+                      value: sliders[spec.id],
+                      onChange: (e) => handleSliderChange(spec.id, e.target.value),
+                      className: 'flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider'
+                    }),
+                    React.createElement('span', { className: 'text-xs text-slate-600 w-32' }, spec.right)
+                  )
+                )
+              )
+            )
+          ),
+
+          React.createElement('div', { className: 'mb-6' },
+            React.createElement('h2', { className: 'text-2xl font-bold text-slate-800 mb-4 pb-2 border-b-2 border-blue-200' },
+              'Language Style'
+            ),
+            React.createElement('p', { className: 'text-slate-600 mb-6' }, 'Define how your brand communicates through written language'),
+            React.createElement('div', { className: 'space-y-6' },
+              languageStyleSliders.map((spec) =>
+                React.createElement('div', { key: spec.id, className: 'bg-slate-50 p-4 rounded-lg' },
+                  React.createElement('div', { className: 'flex justify-between items-center mb-2' },
+                    React.createElement('span', { className: 'font-semibold text-slate-800' }, spec.label),
+                    React.createElement('span', { className: 'text-sm text-slate-600 bg-white px-3 py-1 rounded-full' },
+                      getSliderPosition(languageSliders[spec.id])
+                    )
+                  ),
+                  React.createElement('div', { className: 'flex items-center gap-4' },
+                    React.createElement('span', { className: 'text-xs text-slate-600 w-32 text-right' }, spec.left),
+                    React.createElement('input',
