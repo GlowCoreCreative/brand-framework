@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brand Builder</title>
+  <title>Brand Discovery Framework</title>
   <style>
     * {
       margin: 0;
@@ -34,7 +34,7 @@
     }
     h1 {
       font-size: 2.5rem;
-      color: #1e293b;
+      color: #a61e6f;
       margin-bottom: 0.5rem;
     }
     .subtitle {
@@ -88,10 +88,10 @@
     }
     .section h2 {
       font-size: 1.75rem;
-      color: #1e293b;
+      color: #a61e6f;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
-      border-bottom: 3px solid #bfdbfe;
+      border-bottom: 3px solid #ed5e0a;
     }
     .section-intro {
       color: #64748b;
@@ -271,8 +271,8 @@
     <div class="header">
       <div>
         <img src="https://glowcorecreative.github.io/brand-framework/logo.png" alt="GlowCore Creative" style="max-width: 350px; margin-bottom: 1rem;">
-        <h1>Brand Builder</h1>
-        <p class="subtitle">Complete this framework to define your brand identity</p>
+        <h1>Brand Discovery Framework</h1>
+        <p class="subtitle">Take your time working through these questions. Don't worry if you're uncertain about any answers, we'll refine everything together. Just share what feels right to you, and leave anything blank that doesn't resonate yet.</p>
       </div>
       <div class="button-group">
         <button class="btn-submit" onclick="submitBrand()" id="submitBtn">
@@ -726,215 +726,3 @@
       }
       
       return data;
-    }
-
-    function showAlert(message, type) {
-      const container = document.getElementById('alertContainer');
-      container.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-      setTimeout(() => {
-        container.innerHTML = '';
-      }, 5000);
-    }
-
-    function exportBrand() {
-      const data = getFormData();
-      data.timestamp = new Date().toISOString();
-      
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `brand-framework-${data.name || 'untitled'}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    async function submitBrand() {
-      const data = getFormData();
-      
-      if (!data.name) {
-        showAlert('Please enter a brand name before submitting.', 'error');
-        return;
-      }
-
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>⏳</span> Submitting...';
-
-      const formatSliderValue = (value) => {
-        value = parseInt(value);
-        if (value < 25) return "Strongly Left";
-        if (value < 45) return "Moderately Left";
-        if (value < 55) return "Balanced";
-        if (value < 75) return "Moderately Right";
-        return "Strongly Right";
-      };
-
-      const generateVoiceSummary = () => {
-        const traits = [];
-        
-        if (data.voiceTone > 60) traits.push("punchy and bold");
-        else if (data.voiceTone < 40) traits.push("soft and gentle");
-        
-        if (data.personality > 60) traits.push("playful");
-        else if (data.personality < 40) traits.push("serious and professional");
-        
-        if (data.formality > 60) traits.push("casual and conversational");
-        else if (data.formality < 40) traits.push("formal and polished");
-        
-        if (data.emotion > 60) traits.push("emotionally driven");
-        else if (data.emotion < 40) traits.push("logical and rational");
-        
-        if (data.complexity > 60) traits.push("sophisticated");
-        else if (data.complexity < 40) traits.push("simple and clear");
-        
-        if (data.innovation > 60) traits.push("modern and cutting-edge");
-        else if (data.innovation < 40) traits.push("traditional");
-        
-        if (data.approachability > 60) traits.push("accessible and inclusive");
-        else if (data.approachability < 40) traits.push("exclusive and premium");
-        
-        if (data.energy > 60) traits.push("energetic and dynamic");
-        else if (data.energy < 40) traits.push("calm and measured");
-        
-        if (traits.length === 0) return "This brand maintains a balanced, moderate approach across all voice attributes.";
-        
-        return `This brand voice is ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
-      };
-
-      const generateLanguageSummary = () => {
-        const traits = [];
-        
-        if (data.vocabulary > 60) traits.push("uses industry-specific jargon");
-        else if (data.vocabulary < 40) traits.push("uses everyday language");
-        
-        if (data.sentenceLength > 60) traits.push("favors long, flowing sentences");
-        else if (data.sentenceLength < 40) traits.push("uses short, snappy sentences");
-        
-        if (data.technicality > 60) traits.push("is technical and precise");
-        else if (data.technicality < 40) traits.push("explains in layman's terms");
-        
-        if (data.storytelling > 60) traits.push("uses stories and narratives");
-        else if (data.storytelling < 40) traits.push("focuses on facts and data");
-        
-        if (data.humor > 60) traits.push("incorporates wit and humor");
-        else if (data.humor < 40) traits.push("maintains a serious tone");
-        
-        if (data.directness > 60) traits.push("communicates subtly and suggestively");
-        else if (data.directness < 40) traits.push("is direct and clear");
-        
-        if (traits.length === 0) return "This brand uses a balanced language style across all attributes.";
-        
-        return `The language style ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
-      };
-
-      const emailData = {
-        brand_name: data.name || 'Untitled',
-        submission_date: new Date().toLocaleString(),
-        
-        voice_summary: generateVoiceSummary(),
-        language_summary: generateLanguageSummary(),
-        
-        foundation_name: data.name || 'N/A',
-        foundation_tagline: data.tagline || 'N/A',
-        foundation_mission: data.mission || 'N/A',
-        foundation_vision: data.vision || 'N/A',
-        foundation_values: data.values || 'N/A',
-
-        audience_primary: data.primaryAudience || 'N/A',
-        audience_demographics: data.demographics || 'N/A',
-        audience_psychographics: data.psychographics || 'N/A',
-        audience_needs: data.customerNeeds || 'N/A',
-
-        market_category: data.category || 'N/A',
-        market_category_other: data.categoryOther || '',
-        market_competitors: data.competitors || 'N/A',
-        market_differentiation: data.differentiation || 'N/A',
-        market_value_prop: data.valueProposition || 'N/A',
-
-        personality_archetype: data.archetype || 'N/A',
-        personality_archetype_other: data.archetypeOther || '',
-        personality_human_traits: data.humanTraits || 'N/A',
-        personality_avoid_traits: data.avoidTraits || 'N/A',
-
-        visual_color: data.colorPreferences || 'N/A',
-        visual_style: data.visualStyle || 'N/A',
-        visual_style_other: data.visualStyleOther || '',
-        visual_imagery: data.imagery || 'N/A',
-        visual_imagery_other: data.imageryOther || '',
-
-        messaging_key_messages: data.keyMessages || 'N/A',
-        messaging_avoid: data.avoidLanguage || 'N/A',
-
-        voice_tone_value: data.voiceTone || 50,
-        voice_tone_label: formatSliderValue(data.voiceTone || 50),
-        voice_personality_value: data.personality || 50,
-        voice_personality_label: formatSliderValue(data.personality || 50),
-        voice_formality_value: data.formality || 50,
-        voice_formality_label: formatSliderValue(data.formality || 50),
-        voice_emotion_value: data.emotion || 50,
-        voice_emotion_label: formatSliderValue(data.emotion || 50),
-        voice_complexity_value: data.complexity || 50,
-        voice_complexity_label: formatSliderValue(data.complexity || 50),
-        voice_innovation_value: data.innovation || 50,
-        voice_innovation_label: formatSliderValue(data.innovation || 50),
-        voice_approachability_value: data.approachability || 50,
-        voice_approachability_label: formatSliderValue(data.approachability || 50),
-        voice_energy_value: data.energy || 50,
-        voice_energy_label: formatSliderValue(data.energy || 50),
-
-        lang_vocabulary_value: data.vocabulary || 50,
-        lang_vocabulary_label: formatSliderValue(data.vocabulary || 50),
-        lang_sentence_value: data.sentenceLength || 50,
-        lang_sentence_label: formatSliderValue(data.sentenceLength || 50),
-        lang_technicality_value: data.technicality || 50,
-        lang_technicality_label: formatSliderValue(data.technicality || 50),
-        lang_storytelling_value: data.storytelling || 50,
-        lang_storytelling_label: formatSliderValue(data.storytelling || 50),
-        lang_humor_value: data.humor || 50,
-        lang_humor_label: formatSliderValue(data.humor || 50),
-        lang_directness_value: data.directness || 50,
-        lang_directness_label: formatSliderValue(data.directness || 50)
-      };
-
-      try {
-        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            service_id: 'service_dg5e7ka',
-            template_id: 'template_h1pz9g3',
-            user_id: 'f1khU9n23hpADDU7G',
-            template_params: emailData
-          })
-        });
-
-        if (response.ok) {
-          showAlert('Brand framework submitted successfully! Thank you.', 'success');
-        } else {
-          throw new Error('Failed to send');
-        }
-      } catch (error) {
-        showAlert('Failed to submit. Please try again or download and email the file.', 'error');
-        console.error('EmailJS error:', error);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>📤</span> Submit';
-      }
-    }
-
-    function resetForm() {
-      if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
-        document.getElementById('brandForm').reset();
-        document.querySelectorAll('.visual-option').forEach(el => el.classList.remove('selected'));
-        document.getElementById('visualStyleInput').value = '';
-        document.querySelectorAll('[id$="Other"]').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('.slider-value').forEach(el => el.textContent = 'Balanced');
-        document.getElementById('alertContainer').innerHTML = '';
-      }
-    }
-  </script>
-</body>
-</html>
