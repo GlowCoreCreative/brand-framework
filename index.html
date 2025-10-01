@@ -1,74 +1,9 @@
-const formatSliderValue = (value) => {
-        value = parseInt(value);
-        if (value < 25) return "Strongly Left";
-        if (value < 45) return "Moderately Left";
-        if (value < 55) return "Balanced";
-        if (value < 75) return "Moderately Right";
-        return "Strongly Right";
-      };
-
-      const generateVoiceSummary = () => {
-        const traits = [];
-        
-        if (data.voiceTone > 60) traits.push("punchy and bold");
-        else if (data.voiceTone < 40) traits.push("soft and gentle");
-        
-        if (data.personality > 60) traits.push("playful");
-        else if (data.personality < 40) traits.push("serious and professional");
-        
-        if (data.formality > 60) traits.push("casual and conversational");
-        else if (data.formality < 40) traits.push("formal and polished");
-        
-        if (data.emotion > 60) traits.push("emotionally driven");
-        else if (data.emotion < 40) traits.push("logical and rational");
-        
-        if (data.complexity > 60) traits.push("sophisticated");
-        else if (data.complexity < 40) traits.push("simple and clear");
-        
-        if (data.innovation > 60) traits.push("modern and cutting-edge");
-        else if (data.innovation < 40) traits.push("traditional");
-        
-        if (data.approachability > 60) traits.push("accessible and inclusive");
-        else if (data.approachability < 40) traits.push("exclusive and premium");
-        
-        if (data.energy > 60) traits.push("energetic and dynamic");
-        else if (data.energy < 40) traits.push("calm and measured");
-        
-        if (traits.length === 0) return "This brand maintains a balanced, moderate approach across all voice attributes.";
-        
-        return `This brand voice is ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
-      };
-
-      const generateLanguageSummary = () => {
-        const traits = [];
-        
-        if (data.vocabulary > 60) traits.push("uses industry-specific jargon");
-        else if (data.vocabulary < 40) traits.push("uses everyday language");
-        
-        if (data.sentenceLength > 60) traits.push("favors long, flowing sentences");
-        else if (data.sentenceLength < 40) traits.push("uses short, snappy sentences");
-        
-        if (data.technicality > 60) traits.push("is technical and precise");
-        else if (data.technicality < 40) traits.push("explains in layman's terms");
-        
-        if (data.storytelling > 60) traits.push("uses stories and narratives");
-        else if (data.storytelling < 40) traits.push("focuses on facts and data");
-        
-        if (data.humor > 60) traits.push("incorporates wit and humor");
-        else if (data.humor < 40) traits.push("maintains a serious tone");
-        
-        if (data.directness > 60) traits.push("communicates subtly and suggestively");
-        else if (data.directness < 40) traits.push("is direct and clear");
-        
-        if (traits.length === 0) return "This brand uses a balanced language style across all attributes.";
-        
-        return `The language style ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
-      };<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brand Framework Builder</title>
+  <title>Brand Builder</title>
   <style>
     * {
       margin: 0;
@@ -335,7 +270,7 @@ const formatSliderValue = (value) => {
   <div class="container">
     <div class="header">
       <div>
-        <img src="https://glowcorecreative.github.io/brand-framework/logo.png" alt="GlowCore Creative" style="max-width: 200px; margin-bottom: 1rem;">
+        <img src="https://glowcorecreative.github.io/brand-framework/logo.png" alt="GlowCore Creative" style="max-width: 350px; margin-bottom: 1rem;">
         <h1>Brand Builder</h1>
         <p class="subtitle">Complete this framework to define your brand identity</p>
       </div>
@@ -835,52 +770,102 @@ const formatSliderValue = (value) => {
         return "Strongly Right";
       };
 
+      const generateVoiceSummary = () => {
+        const traits = [];
+        
+        if (data.voiceTone > 60) traits.push("punchy and bold");
+        else if (data.voiceTone < 40) traits.push("soft and gentle");
+        
+        if (data.personality > 60) traits.push("playful");
+        else if (data.personality < 40) traits.push("serious and professional");
+        
+        if (data.formality > 60) traits.push("casual and conversational");
+        else if (data.formality < 40) traits.push("formal and polished");
+        
+        if (data.emotion > 60) traits.push("emotionally driven");
+        else if (data.emotion < 40) traits.push("logical and rational");
+        
+        if (data.complexity > 60) traits.push("sophisticated");
+        else if (data.complexity < 40) traits.push("simple and clear");
+        
+        if (data.innovation > 60) traits.push("modern and cutting-edge");
+        else if (data.innovation < 40) traits.push("traditional");
+        
+        if (data.approachability > 60) traits.push("accessible and inclusive");
+        else if (data.approachability < 40) traits.push("exclusive and premium");
+        
+        if (data.energy > 60) traits.push("energetic and dynamic");
+        else if (data.energy < 40) traits.push("calm and measured");
+        
+        if (traits.length === 0) return "This brand maintains a balanced, moderate approach across all voice attributes.";
+        
+        return `This brand voice is ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
+      };
+
+      const generateLanguageSummary = () => {
+        const traits = [];
+        
+        if (data.vocabulary > 60) traits.push("uses industry-specific jargon");
+        else if (data.vocabulary < 40) traits.push("uses everyday language");
+        
+        if (data.sentenceLength > 60) traits.push("favors long, flowing sentences");
+        else if (data.sentenceLength < 40) traits.push("uses short, snappy sentences");
+        
+        if (data.technicality > 60) traits.push("is technical and precise");
+        else if (data.technicality < 40) traits.push("explains in layman's terms");
+        
+        if (data.storytelling > 60) traits.push("uses stories and narratives");
+        else if (data.storytelling < 40) traits.push("focuses on facts and data");
+        
+        if (data.humor > 60) traits.push("incorporates wit and humor");
+        else if (data.humor < 40) traits.push("maintains a serious tone");
+        
+        if (data.directness > 60) traits.push("communicates subtly and suggestively");
+        else if (data.directness < 40) traits.push("is direct and clear");
+        
+        if (traits.length === 0) return "This brand uses a balanced language style across all attributes.";
+        
+        return `The language style ${traits.slice(0, -1).join(", ")}${traits.length > 1 ? ", and " + traits[traits.length - 1] : traits[0]}.`;
+      };
+
       const emailData = {
         brand_name: data.name || 'Untitled',
         submission_date: new Date().toLocaleString(),
         
-        // Summaries
         voice_summary: generateVoiceSummary(),
         language_summary: generateLanguageSummary(),
         
-        // Foundation
         foundation_name: data.name || 'N/A',
         foundation_tagline: data.tagline || 'N/A',
         foundation_mission: data.mission || 'N/A',
         foundation_vision: data.vision || 'N/A',
         foundation_values: data.values || 'N/A',
 
-        // Audience
         audience_primary: data.primaryAudience || 'N/A',
         audience_demographics: data.demographics || 'N/A',
         audience_psychographics: data.psychographics || 'N/A',
         audience_needs: data.customerNeeds || 'N/A',
 
-        // Market
         market_category: data.category || 'N/A',
         market_category_other: data.categoryOther || '',
         market_competitors: data.competitors || 'N/A',
         market_differentiation: data.differentiation || 'N/A',
         market_value_prop: data.valueProposition || 'N/A',
 
-        // Personality
         personality_archetype: data.archetype || 'N/A',
         personality_archetype_other: data.archetypeOther || '',
         personality_human_traits: data.humanTraits || 'N/A',
         personality_avoid_traits: data.avoidTraits || 'N/A',
 
-        // Visual
         visual_color: data.colorPreferences || 'N/A',
         visual_style: data.visualStyle || 'N/A',
         visual_style_other: data.visualStyleOther || '',
         visual_imagery: data.imagery || 'N/A',
         visual_imagery_other: data.imageryOther || '',
 
-        // Messaging
         messaging_key_messages: data.keyMessages || 'N/A',
         messaging_avoid: data.avoidLanguage || 'N/A',
 
-        // Brand Voice Sliders
         voice_tone_value: data.voiceTone || 50,
         voice_tone_label: formatSliderValue(data.voiceTone || 50),
         voice_personality_value: data.personality || 50,
@@ -898,7 +883,6 @@ const formatSliderValue = (value) => {
         voice_energy_value: data.energy || 50,
         voice_energy_label: formatSliderValue(data.energy || 50),
 
-        // Language Style Sliders
         lang_vocabulary_value: data.vocabulary || 50,
         lang_vocabulary_label: formatSliderValue(data.vocabulary || 50),
         lang_sentence_value: data.sentenceLength || 50,
