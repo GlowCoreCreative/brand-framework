@@ -5,264 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Discovery Framework</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      padding: 2.5rem;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      color: #a61e6f;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      color: #64748b;
-      font-size: 1rem;
-    }
-    .button-group {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
-    }
-    .btn-submit {
-      background: #16a34a;
-      color: white;
-    }
-    .btn-submit:hover:not(:disabled) {
-      background: #15803d;
-    }
-    .btn-submit:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-    }
-    .btn-export {
-      background: #2563eb;
-      color: white;
-    }
-    .btn-export:hover {
-      background: #1d4ed8;
-    }
-    .btn-reset {
-      background: #e2e8f0;
-      color: #475569;
-    }
-    .btn-reset:hover {
-      background: #cbd5e1;
-    }
-    .section {
-      margin-bottom: 2.5rem;
-    }
-    .section h2 {
-      font-size: 1.75rem;
-      color: #a61e6f;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 3px solid #ed5e0a;
-    }
-    .section-intro {
-      color: #64748b;
-      margin-bottom: 1.5rem;
-    }
-    .field {
-      margin-bottom: 1.25rem;
-    }
-    label {
-      display: block;
-      font-weight: 600;
-      color: #475569;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-    input[type="text"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 0.85rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 0.5rem;
-      font-size: 0.95rem;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-    textarea {
-      resize: vertical;
-      min-height: 70px;
-    }
-    .visual-options {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 0.75rem;
-    }
-    .visual-option {
-      padding: 1rem;
-      border: 2px solid #cbd5e1;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .visual-option:hover {
-      border-color: #94a3b8;
-    }
-    .visual-option.selected {
-      border-color: #2563eb;
-      background: #eff6ff;
-    }
-    .visual-option-title {
-      font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 0.25rem;
-    }
-    .visual-option-desc {
-      font-size: 0.875rem;
-      color: #64748b;
-      margin-bottom: 0.5rem;
-    }
-    .visual-option-example {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      font-style: italic;
-    }
-    .slider-container {
-      background: #f8fafc;
-      padding: 1.25rem;
-      border-radius: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .slider-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .slider-label {
-      font-weight: 600;
-      color: #1e293b;
-    }
-    .slider-value {
-      background: white;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-    .slider-track {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .slider-end {
-      font-size: 0.8rem;
-      color: #64748b;
-      min-width: 100px;
-    }
-    .slider-end.left {
-      text-align: right;
-    }
-    input[type="range"] {
-      flex: 1;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 8px;
-      background: #cbd5e1;
-      border-radius: 5px;
-      outline: none;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #2563eb;
-      cursor: pointer;
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #2563eb;
-      cursor: pointer;
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .alert {
-      padding: 1rem;
-      border-radius: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .alert-success {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
-      color: #166534;
-    }
-    .alert-error {
-      background: #fef2f2;
-      border: 1px solid #fca5a5;
-      color: #991b1b;
-    }
-    .hidden {
-      display: none;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 2rem; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 2.5rem; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    h1 { font-size: 2.5rem; color: #a61e6f; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; font-size: 1rem; }
+    .button-group { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    button { padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; font-size: 0.95rem; cursor: pointer; font-weight: 500; transition: all 0.2s; }
+    .btn-submit { background: #16a34a; color: white; }
+    .btn-submit:hover:not(:disabled) { background: #15803d; }
+    .btn-submit:disabled { background: #9ca3af; cursor: not-allowed; }
+    .btn-export { background: #2563eb; color: white; }
+    .btn-export:hover { background: #1d4ed8; }
+    .btn-reset { background: #e2e8f0; color: #475569; }
+    .btn-reset:hover { background: #cbd5e1; }
+    .section { margin-bottom: 2.5rem; }
+    .section h2 { font-size: 1.75rem; color: #a61e6f; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #ed5e0a; }
+    .section-intro { color: #64748b; margin-bottom: 1.5rem; }
+    .field { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; color: #475569; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    input[type="text"], textarea, select { width: 100%; padding: 0.85rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s; }
+    input[type="text"]:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+    textarea { resize: vertical; min-height: 70px; }
+    .visual-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem; }
+    .visual-option { padding: 1rem; border: 2px solid #cbd5e1; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .visual-option:hover { border-color: #94a3b8; }
+    .visual-option.selected { border-color: #2563eb; background: #eff6ff; }
+    .visual-option-title { font-weight: 600; color: #1e293b; margin-bottom: 0.25rem; }
+    .visual-option-desc { font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem; }
+    .visual-option-example { font-size: 0.75rem; color: #94a3b8; font-style: italic; }
+    .slider-container { background: #f8fafc; padding: 1.25rem; border-radius: 0.5rem; margin-bottom: 1.5rem; }
+    .slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .slider-label { font-weight: 600; color: #1e293b; }
+    .slider-value { background: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.875rem; color: #64748b; }
+    .slider-track { display: flex; align-items: center; gap: 1rem; }
+    .slider-end { font-size: 0.8rem; color: #64748b; min-width: 100px; }
+    .slider-end.left { text-align: right; }
+    input[type="range"] { flex: 1; -webkit-appearance: none; appearance: none; height: 8px; background: #cbd5e1; border-radius: 5px; outline: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #2563eb; cursor: pointer; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; background: #2563eb; cursor: pointer; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .alert { padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem; }
+    .alert-success { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+    .alert-error { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+    .hidden { display: none; }
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-      .container {
-        padding: 1.5rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      .header {
-        flex-direction: column;
-      }
-      .slider-end {
-        min-width: 80px;
-        font-size: 0.7rem;
-      }
+      body { padding: 1rem; }
+      .container { padding: 1.5rem; }
+      h1 { font-size: 2rem; }
+      .header { flex-direction: column; }
+      .slider-end { min-width: 80px; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -275,460 +67,109 @@
         <p class="subtitle">Take your time working through these questions. Don't worry if you're uncertain about any answers, we'll refine everything together. Just share what feels right to you, and leave anything blank that doesn't resonate yet.</p>
       </div>
       <div class="button-group">
-        <button class="btn-submit" onclick="submitBrand()" id="submitBtn">
-          Submit
-        </button>
-        <button class="btn-export" onclick="exportBrand()">
-          Export
-        </button>
-        <button class="btn-reset" onclick="resetForm()">
-          Reset
-        </button>
+        <button class="btn-submit" onclick="submitBrand()" id="submitBtn">Submit</button>
+        <button class="btn-export" onclick="exportBrand()">Export</button>
+        <button class="btn-reset" onclick="resetForm()">Reset</button>
       </div>
     </div>
 
     <div id="alertContainer"></div>
 
     <form id="brandForm">
-      <!-- Brand Foundation -->
       <div class="section">
         <h2>Brand Foundation</h2>
-        <div class="field">
-          <label>Brand Name *</label>
-          <input type="text" name="name" placeholder="What's your brand called?" required>
-        </div>
-        <div class="field">
-          <label>Tagline (Optional)</label>
-          <input type="text" name="tagline" placeholder="A brief phrase that captures your essence">
-        </div>
-        <div class="field">
-          <label>Mission Statement</label>
-          <textarea name="mission" placeholder="Why does your brand exist?"></textarea>
-        </div>
-        <div class="field">
-          <label>Vision</label>
-          <textarea name="vision" placeholder="Where do you want to be in 5-10 years?"></textarea>
-        </div>
-        <div class="field">
-          <label>Core Values (3-5)</label>
-          <textarea name="values" placeholder="What principles guide your brand? (comma separated)"></textarea>
-        </div>
+        <div class="field"><label>Brand Name *</label><input type="text" name="name" placeholder="What's your brand called?" required></div>
+        <div class="field"><label>Tagline (Optional)</label><input type="text" name="tagline" placeholder="A brief phrase that captures your essence"></div>
+        <div class="field"><label>Mission Statement</label><textarea name="mission" placeholder="Why does your brand exist?"></textarea></div>
+        <div class="field"><label>Vision</label><textarea name="vision" placeholder="Where do you want to be in 5-10 years?"></textarea></div>
+        <div class="field"><label>Core Values (3-5)</label><textarea name="values" placeholder="What principles guide your brand? (comma separated)"></textarea></div>
       </div>
 
-      <!-- Target Audience -->
       <div class="section">
         <h2>Target Audience</h2>
-        <div class="field">
-          <label>Primary Audience</label>
-          <textarea name="primaryAudience" placeholder="Who are you serving?"></textarea>
-        </div>
-        <div class="field">
-          <label>Demographics</label>
-          <textarea name="demographics" placeholder="Age, location, income, occupation, etc."></textarea>
-        </div>
-        <div class="field">
-          <label>Psychographics</label>
-          <textarea name="psychographics" placeholder="Values, interests, lifestyle, pain points"></textarea>
-        </div>
-        <div class="field">
-          <label>Customer Needs</label>
-          <textarea name="customerNeeds" placeholder="What problems are you solving?"></textarea>
-        </div>
+        <div class="field"><label>Primary Audience</label><textarea name="primaryAudience" placeholder="Who are you serving?"></textarea></div>
+        <div class="field"><label>Demographics</label><textarea name="demographics" placeholder="Age, location, income, occupation, etc."></textarea></div>
+        <div class="field"><label>Psychographics</label><textarea name="psychographics" placeholder="Values, interests, lifestyle, pain points"></textarea></div>
+        <div class="field"><label>Customer Needs</label><textarea name="customerNeeds" placeholder="What problems are you solving?"></textarea></div>
       </div>
 
-      <!-- Market Position -->
       <div class="section">
         <h2>Market Position</h2>
-        <div class="field">
-          <label>Category/Industry</label>
-          <select name="category" onchange="toggleOther(this, 'categoryOther')">
-            <option value="">Select an option...</option>
-            <option>Technology & Software</option>
-            <option>Healthcare & Wellness</option>
-            <option>Food & Beverage</option>
-            <option>Fashion & Apparel</option>
-            <option>Finance & Banking</option>
-            <option>Education & Training</option>
-            <option>Entertainment & Media</option>
-            <option>Real Estate & Construction</option>
-            <option>Professional Services</option>
-            <option>Retail & E-commerce</option>
-            <option>Travel & Hospitality</option>
-            <option>Waste</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field hidden" id="categoryOther">
-          <label>If Other, specify:</label>
-          <input type="text" name="categoryOther" placeholder="Your industry">
-        </div>
-        <div class="field">
-          <label>Key Competitors</label>
-          <textarea name="competitors" placeholder="Who else is in this space?"></textarea>
-        </div>
-        <div class="field">
-          <label>What Makes You Different?</label>
-          <textarea name="differentiation" placeholder="Your unique positioning"></textarea>
-        </div>
-        <div class="field">
-          <label>Value Proposition</label>
-          <textarea name="valueProposition" placeholder="Why should customers choose you?"></textarea>
-        </div>
+        <div class="field"><label>Category/Industry</label><select name="category" onchange="toggleOther(this, 'categoryOther')"><option value="">Select an option...</option><option>Technology & Software</option><option>Healthcare & Wellness</option><option>Food & Beverage</option><option>Fashion & Apparel</option><option>Finance & Banking</option><option>Education & Training</option><option>Entertainment & Media</option><option>Real Estate & Construction</option><option>Professional Services</option><option>Retail & E-commerce</option><option>Travel & Hospitality</option><option>Waste</option><option>Other</option></select></div>
+        <div class="field hidden" id="categoryOther"><label>If Other, specify:</label><input type="text" name="categoryOther" placeholder="Your industry"></div>
+        <div class="field"><label>Key Competitors</label><textarea name="competitors" placeholder="Who else is in this space?"></textarea></div>
+        <div class="field"><label>What Makes You Different?</label><textarea name="differentiation" placeholder="Your unique positioning"></textarea></div>
+        <div class="field"><label>Value Proposition</label><textarea name="valueProposition" placeholder="Why should customers choose you?"></textarea></div>
       </div>
 
-      <!-- Brand Personality -->
       <div class="section">
         <h2>Brand Personality</h2>
-        <div class="field">
-          <label>Brand Archetype</label>
-          <select name="archetype" onchange="toggleOther(this, 'archetypeOther')">
-            <option value="">Select an option...</option>
-            <option>The Innocent (optimistic, pure, simple)</option>
-            <option>The Sage (wise, knowledgeable, thoughtful)</option>
-            <option>The Explorer (adventurous, independent, pioneering)</option>
-            <option>The Outlaw (rebellious, disruptive, revolutionary)</option>
-            <option>The Magician (transformative, visionary, charismatic)</option>
-            <option>The Hero (courageous, bold, inspirational)</option>
-            <option>The Lover (passionate, intimate, sensual)</option>
-            <option>The Jester (playful, humorous, fun-loving)</option>
-            <option>The Everyman (relatable, down-to-earth, friendly)</option>
-            <option>The Caregiver (nurturing, compassionate, generous)</option>
-            <option>The Ruler (authoritative, powerful, controlling)</option>
-            <option>The Creator (innovative, artistic, imaginative)</option>
-            <option>Other/Combination</option>
-          </select>
-        </div>
-        <div class="field hidden" id="archetypeOther">
-          <label>If Other, describe:</label>
-          <input type="text" name="archetypeOther" placeholder="Your archetype combination">
-        </div>
-        <div class="field">
-          <label>If Your Brand Was a Person</label>
-          <textarea name="humanTraits" placeholder="Describe their personality"></textarea>
-        </div>
-        <div class="field">
-          <label>What You're NOT</label>
-          <textarea name="avoidTraits" placeholder="Traits to avoid"></textarea>
-        </div>
+        <div class="field"><label>Brand Archetype</label><select name="archetype" onchange="toggleOther(this, 'archetypeOther')"><option value="">Select an option...</option><option>The Innocent (optimistic, pure, simple)</option><option>The Sage (wise, knowledgeable, thoughtful)</option><option>The Explorer (adventurous, independent, pioneering)</option><option>The Outlaw (rebellious, disruptive, revolutionary)</option><option>The Magician (transformative, visionary, charismatic)</option><option>The Hero (courageous, bold, inspirational)</option><option>The Lover (passionate, intimate, sensual)</option><option>The Jester (playful, humorous, fun-loving)</option><option>The Everyman (relatable, down-to-earth, friendly)</option><option>The Caregiver (nurturing, compassionate, generous)</option><option>The Ruler (authoritative, powerful, controlling)</option><option>The Creator (innovative, artistic, imaginative)</option><option>Other/Combination</option></select></div>
+        <div class="field hidden" id="archetypeOther"><label>If Other, describe:</label><input type="text" name="archetypeOther" placeholder="Your archetype combination"></div>
+        <div class="field"><label>If Your Brand Was a Person</label><textarea name="humanTraits" placeholder="Describe their personality"></textarea></div>
+        <div class="field"><label>What You're NOT</label><textarea name="avoidTraits" placeholder="Traits to avoid"></textarea></div>
       </div>
 
-      <!-- Visual Identity -->
       <div class="section">
         <h2>Visual Identity</h2>
-        <div class="field">
-          <label>Color Direction</label>
-          <textarea name="colorPreferences" placeholder="Any color preferences or meanings?"></textarea>
-        </div>
+        <div class="field"><label>Color Direction</label><textarea name="colorPreferences" placeholder="Any color preferences or meanings?"></textarea></div>
         <div class="field">
           <label>Visual Style</label>
           <div class="visual-options">
-            <div class="visual-option" onclick="selectVisual(this, 'Minimalist')">
-              <div class="visual-option-title">Minimalist</div>
-              <div class="visual-option-desc">Clean lines, lots of whitespace, simple typography</div>
-              <div class="visual-option-example">Examples: Apple, Muji, Airbnb</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Bold & Vibrant')">
-              <div class="visual-option-title">Bold & Vibrant</div>
-              <div class="visual-option-desc">Bright colors, strong contrasts, eye-catching</div>
-              <div class="visual-option-example">Examples: Spotify, YouTube, Lyft</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Elegant & Sophisticated')">
-              <div class="visual-option-title">Elegant & Sophisticated</div>
-              <div class="visual-option-desc">Refined, luxury feel, classic typography</div>
-              <div class="visual-option-example">Examples: Chanel, Rolex, Mercedes-Benz</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Playful & Fun')">
-              <div class="visual-option-title">Playful & Fun</div>
-              <div class="visual-option-desc">Quirky, colorful, whimsical elements</div>
-              <div class="visual-option-example">Examples: Mailchimp, Duolingo, Ben & Jerry's</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Rugged & Industrial')">
-              <div class="visual-option-title">Rugged & Industrial</div>
-              <div class="visual-option-desc">Raw, textured, authentic, masculine</div>
-              <div class="visual-option-example">Examples: Carhartt, Yeti, Patagonia</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Modern & Tech-Forward')">
-              <div class="visual-option-title">Modern & Tech-Forward</div>
-              <div class="visual-option-desc">Gradients, glassmorphism, futuristic</div>
-              <div class="visual-option-example">Examples: Stripe, Figma, Notion</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Organic & Natural')">
-              <div class="visual-option-title">Organic & Natural</div>
-              <div class="visual-option-desc">Earthy tones, organic shapes, sustainable feel</div>
-              <div class="visual-option-example">Examples: Whole Foods, The Body Shop, Allbirds</div>
-            </div>
-            <div class="visual-option" onclick="selectVisual(this, 'Other')">
-              <div class="visual-option-title">Other</div>
-              <div class="visual-option-desc">Something unique to your brand</div>
-            </div>
+            <div class="visual-option" onclick="selectVisual(this, 'Minimalist')"><div class="visual-option-title">Minimalist</div><div class="visual-option-desc">Clean lines, lots of whitespace, simple typography</div><div class="visual-option-example">Examples: Apple, Muji, Airbnb</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Bold & Vibrant')"><div class="visual-option-title">Bold & Vibrant</div><div class="visual-option-desc">Bright colors, strong contrasts, eye-catching</div><div class="visual-option-example">Examples: Spotify, YouTube, Lyft</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Elegant & Sophisticated')"><div class="visual-option-title">Elegant & Sophisticated</div><div class="visual-option-desc">Refined, luxury feel, classic typography</div><div class="visual-option-example">Examples: Chanel, Rolex, Mercedes-Benz</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Playful & Fun')"><div class="visual-option-title">Playful & Fun</div><div class="visual-option-desc">Quirky, colorful, whimsical elements</div><div class="visual-option-example">Examples: Mailchimp, Duolingo, Ben & Jerry's</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Rugged & Industrial')"><div class="visual-option-title">Rugged & Industrial</div><div class="visual-option-desc">Raw, textured, authentic, masculine</div><div class="visual-option-example">Examples: Carhartt, Yeti, Patagonia</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Modern & Tech-Forward')"><div class="visual-option-title">Modern & Tech-Forward</div><div class="visual-option-desc">Gradients, glassmorphism, futuristic</div><div class="visual-option-example">Examples: Stripe, Figma, Notion</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Organic & Natural')"><div class="visual-option-title">Organic & Natural</div><div class="visual-option-desc">Earthy tones, organic shapes, sustainable feel</div><div class="visual-option-example">Examples: Whole Foods, The Body Shop, Allbirds</div></div>
+            <div class="visual-option" onclick="selectVisual(this, 'Other')"><div class="visual-option-title">Other</div><div class="visual-option-desc">Something unique to your brand</div></div>
           </div>
           <input type="hidden" name="visualStyle" id="visualStyleInput">
         </div>
-        <div class="field hidden" id="visualStyleOther">
-          <label>If Other, describe:</label>
-          <input type="text" name="visualStyleOther" placeholder="Your visual style">
-        </div>
-        <div class="field">
-          <label>Imagery Direction</label>
-          <select name="imagery" onchange="toggleOther(this, 'imageryOther')">
-            <option value="">Select an option...</option>
-            <option>Photography (realistic, human-centered)</option>
-            <option>Illustrations (custom, artistic)</option>
-            <option>Abstract Graphics (shapes, patterns)</option>
-            <option>3D Renders (modern, digital)</option>
-            <option>Mixed Media (combination approach)</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field hidden" id="imageryOther">
-          <label>If Other, specify:</label>
-          <input type="text" name="imageryOther" placeholder="Your imagery style">
-        </div>
+        <div class="field hidden" id="visualStyleOther"><label>If Other, describe:</label><input type="text" name="visualStyleOther" placeholder="Your visual style"></div>
+        <div class="field"><label>Imagery Direction</label><select name="imagery" onchange="toggleOther(this, 'imageryOther')"><option value="">Select an option...</option><option>Photography (realistic, human-centered)</option><option>Illustrations (custom, artistic)</option><option>Abstract Graphics (shapes, patterns)</option><option>3D Renders (modern, digital)</option><option>Mixed Media (combination approach)</option><option>Other</option></select></div>
+        <div class="field hidden" id="imageryOther"><label>If Other, specify:</label><input type="text" name="imageryOther" placeholder="Your imagery style"></div>
       </div>
 
-      <!-- Messaging -->
       <div class="section">
         <h2>Messaging</h2>
-        <div class="field">
-          <label>Key Messages</label>
-          <textarea name="keyMessages" placeholder="Top 3 things you want to communicate"></textarea>
-        </div>
-        <div class="field">
-          <label>Words/Phrases to Avoid</label>
-          <textarea name="avoidLanguage" placeholder="Any jargon or terms you don't want to use?"></textarea>
-        </div>
+        <div class="field"><label>Key Messages</label><textarea name="keyMessages" placeholder="Top 3 things you want to communicate"></textarea></div>
+        <div class="field"><label>Words/Phrases to Avoid</label><textarea name="avoidLanguage" placeholder="Any jargon or terms you don't want to use?"></textarea></div>
       </div>
 
-      <!-- Brand Voice Sliders -->
       <div class="section">
         <h2>Brand Voice Spectrum</h2>
         <p class="section-intro">Move the sliders to define your brand's voice and personality</p>
-        
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Voice Tone</span>
-            <span class="slider-value" id="voiceToneValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Soft & Gentle</span>
-            <input type="range" name="voiceTone" min="0" max="100" value="50" oninput="updateSlider(this, 'voiceToneValue')">
-            <span class="slider-end">Punchy & Bold</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Personality</span>
-            <span class="slider-value" id="personalityValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Serious & Professional</span>
-            <input type="range" name="personality" min="0" max="100" value="50" oninput="updateSlider(this, 'personalityValue')">
-            <span class="slider-end">Playful & Witty</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Formality</span>
-            <span class="slider-value" id="formalityValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Formal & Polished</span>
-            <input type="range" name="formality" min="0" max="100" value="50" oninput="updateSlider(this, 'formalityValue')">
-            <span class="slider-end">Casual & Conversational</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Emotional Appeal</span>
-            <span class="slider-value" id="emotionValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Logical & Rational</span>
-            <input type="range" name="emotion" min="0" max="100" value="50" oninput="updateSlider(this, 'emotionValue')">
-            <span class="slider-end">Emotional & Heartfelt</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Complexity</span>
-            <span class="slider-value" id="complexityValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Simple & Clear</span>
-            <input type="range" name="complexity" min="0" max="100" value="50" oninput="updateSlider(this, 'complexityValue')">
-            <span class="slider-end">Sophisticated & Nuanced</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Innovation</span>
-            <span class="slider-value" id="innovationValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Traditional & Classic</span>
-            <input type="range" name="innovation" min="0" max="100" value="50" oninput="updateSlider(this, 'innovationValue')">
-            <span class="slider-end">Modern & Cutting-Edge</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Approachability</span>
-            <span class="slider-value" id="approachabilityValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Exclusive & Premium</span>
-            <input type="range" name="approachability" min="0" max="100" value="50" oninput="updateSlider(this, 'approachabilityValue')">
-            <span class="slider-end">Accessible & Inclusive</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Energy Level</span>
-            <span class="slider-value" id="energyValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Calm & Measured</span>
-            <input type="range" name="energy" min="0" max="100" value="50" oninput="updateSlider(this, 'energyValue')">
-            <span class="slider-end">Energetic & Dynamic</span>
-          </div>
-        </div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Voice Tone</span><span class="slider-value" id="voiceToneValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Soft & Gentle</span><input type="range" name="voiceTone" min="0" max="100" value="50" oninput="updateSlider(this, 'voiceToneValue')"><span class="slider-end">Punchy & Bold</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Personality</span><span class="slider-value" id="personalityValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Serious & Professional</span><input type="range" name="personality" min="0" max="100" value="50" oninput="updateSlider(this, 'personalityValue')"><span class="slider-end">Playful & Witty</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Formality</span><span class="slider-value" id="formalityValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Formal & Polished</span><input type="range" name="formality" min="0" max="100" value="50" oninput="updateSlider(this, 'formalityValue')"><span class="slider-end">Casual & Conversational</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Emotional Appeal</span><span class="slider-value" id="emotionValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Logical & Rational</span><input type="range" name="emotion" min="0" max="100" value="50" oninput="updateSlider(this, 'emotionValue')"><span class="slider-end">Emotional & Heartfelt</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Complexity</span><span class="slider-value" id="complexityValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Simple & Clear</span><input type="range" name="complexity" min="0" max="100" value="50" oninput="updateSlider(this, 'complexityValue')"><span class="slider-end">Sophisticated & Nuanced</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Innovation</span><span class="slider-value" id="innovationValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Traditional & Classic</span><input type="range" name="innovation" min="0" max="100" value="50" oninput="updateSlider(this, 'innovationValue')"><span class="slider-end">Modern & Cutting-Edge</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Approachability</span><span class="slider-value" id="approachabilityValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Exclusive & Premium</span><input type="range" name="approachability" min="0" max="100" value="50" oninput="updateSlider(this, 'approachabilityValue')"><span class="slider-end">Accessible & Inclusive</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Energy Level</span><span class="slider-value" id="energyValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Calm & Measured</span><input type="range" name="energy" min="0" max="100" value="50" oninput="updateSlider(this, 'energyValue')"><span class="slider-end">Energetic & Dynamic</span></div></div>
       </div>
 
-      <!-- Language Style -->
       <div class="section">
         <h2>Language Style</h2>
         <p class="section-intro">Define how your brand communicates through written language</p>
-        
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Vocabulary</span>
-            <span class="slider-value" id="vocabularyValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Everyday Words</span>
-            <input type="range" name="vocabulary" min="0" max="100" value="50" oninput="updateSlider(this, 'vocabularyValue')">
-            <span class="slider-end">Industry Jargon</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Sentence Length</span>
-            <span class="slider-value" id="sentenceLengthValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Short & Snappy</span>
-            <input type="range" name="sentenceLength" min="0" max="100" value="50" oninput="updateSlider(this, 'sentenceLengthValue')">
-            <span class="slider-end">Long & Flowing</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Technicality</span>
-            <span class="slider-value" id="technicalityValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Layman's Terms</span>
-            <input type="range" name="technicality" min="0" max="100" value="50" oninput="updateSlider(this, 'technicalityValue')">
-            <span class="slider-end">Technical & Precise</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Storytelling</span>
-            <span class="slider-value" id="storytellingValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Facts & Data</span>
-            <input type="range" name="storytelling" min="0" max="100" value="50" oninput="updateSlider(this, 'storytellingValue')">
-            <span class="slider-end">Stories & Narratives</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Humor</span>
-            <span class="slider-value" id="humorValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Serious & Straight</span>
-            <input type="range" name="humor" min="0" max="100" value="50" oninput="updateSlider(this, 'humorValue')">
-            <span class="slider-end">Witty & Humorous</span>
-          </div>
-        </div>
-
-        <div class="slider-container">
-          <div class="slider-header">
-            <span class="slider-label">Directness</span>
-            <span class="slider-value" id="directnessValue">Balanced</span>
-          </div>
-          <div class="slider-track">
-            <span class="slider-end left">Direct & Clear</span>
-            <input type="range" name="directness" min="0" max="100" value="50" oninput="updateSlider(this, 'directnessValue')">
-            <span class="slider-end">Suggestive & Subtle</span>
-          </div>
-        </div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Vocabulary</span><span class="slider-value" id="vocabularyValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Everyday Words</span><input type="range" name="vocabulary" min="0" max="100" value="50" oninput="updateSlider(this, 'vocabularyValue')"><span class="slider-end">Industry Jargon</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Sentence Length</span><span class="slider-value" id="sentenceLengthValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Short & Snappy</span><input type="range" name="sentenceLength" min="0" max="100" value="50" oninput="updateSlider(this, 'sentenceLengthValue')"><span class="slider-end">Long & Flowing</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Technicality</span><span class="slider-value" id="technicalityValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Layman's Terms</span><input type="range" name="technicality" min="0" max="100" value="50" oninput="updateSlider(this, 'technicalityValue')"><span class="slider-end">Technical & Precise</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Storytelling</span><span class="slider-value" id="storytellingValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Facts & Data</span><input type="range" name="storytelling" min="0" max="100" value="50" oninput="updateSlider(this, 'storytellingValue')"><span class="slider-end">Stories & Narratives</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Humor</span><span class="slider-value" id="humorValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Serious & Straight</span><input type="range" name="humor" min="0" max="100" value="50" oninput="updateSlider(this, 'humorValue')"><span class="slider-end">Witty & Humorous</span></div></div>
+        <div class="slider-container"><div class="slider-header"><span class="slider-label">Directness</span><span class="slider-value" id="directnessValue">Balanced</span></div><div class="slider-track"><span class="slider-end left">Direct & Clear</span><input type="range" name="directness" min="0" max="100" value="50" oninput="updateSlider(this, 'directnessValue')"><span class="slider-end">Suggestive & Subtle</span></div></div>
       </div>
     </form>
 
     <div class="button-group" style="margin-top: 2rem; justify-content: center;">
-      <button class="btn-submit" onclick="submitBrand()" id="submitBtn2">
-        Submit
-      </button>
+      <button class="btn-submit" onclick="submitBrand()" id="submitBtn2">Submit</button>
     </div>
   </div>
 
   <script>
-    function toggleOther(select, targetId) {
-      const target = document.getElementById(targetId);
-      if (select.value === 'Other' || select.value === 'Other/Combination') {
-        target.classList.remove('hidden');
-      } else {
-        target.classList.add('hidden');
-      }
-    }
-
-    function selectVisual(element, value) {
-      document.querySelectorAll('.visual-option').forEach(el => el.classList.remove('selected'));
-      element.classList.add('selected');
-      document.getElementById('visualStyleInput').value = value;
-      
-      const otherField = document.getElementById('visualStyleOther');
-      if (value === 'Other') {
-        otherField.classList.remove('hidden');
-      } else {
-        otherField.classList.add('hidden');
-      }
-    }
-
-    function updateSlider(slider, valueId) {
-      const value = parseInt(slider.value);
-      let label;
-      if (value < 25) label = "Strongly Left";
-      else if (value < 45) label = "Moderately Left";
-      else if (value < 55) label = "Balanced";
-      else if (value < 75) label = "Moderately Right";
-      else label = "Strongly Right";
-      
-      document.getElementById(valueId).textContent = label;
-    }
-
-    function getFormData() {
-      const form = document.getElementById('brandForm');
-      const formData = new FormData(form);
-      const data = {};
-      
-      for (let [key, value] of formData.entries()) {
-        data[key] = value;
-      }
-      
-      return data;
+function toggleOther(s,t){const e=document.getElementById(t);s.value==='Other'||s.value==='Other/Combination'?e.classList.remove('hidden'):e.classList.add('hidden')}function selectVisual(e,v){document.querySelectorAll('.visual-option').forEach(el=>el.classList.remove('selected'));e.classList.add('selected');document.getElementById('visualStyleInput').value=v;const o=document.getElementById('visualStyleOther');v==='Other'?o.classList.remove('hidden'):o.classList.add('hidden')}function updateSlider(s,vId){const v=parseInt(s.value);let l;if(v<25)l="Strongly Left";else if(v<45)l="Moderately Left";else if(v<55)l="Balanced";else if(v<75)l="Moderately Right";else l="Strongly Right";document.getElementById(vId).textContent=l}function getFormData(){const f=document.getElementById('brandForm');const fd=new FormData(f);const d={};for(let[k,v]of fd.entries()){d[k]=v}return d}function showAlert(m,t){const c=document.getElementById('alertContainer');c.innerHTML=`<div class="alert alert-${t}">${m}</div>`;setTimeout(()=>{c.innerHTML=''},5000)}function exportBrand(){const d=getFormData();d.timestamp=new Date().toISOString();const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`brand-framework-${d.name||'untitled'}.json`;a.click();URL.revokeObjectURL(u)}async function submitBrand(){const d=getFormData();if(!d.name){showAlert('Please enter a brand name before submitting.','error');return}const sb=document.getElementById('submitBtn');const sb2=document.getElementById('submitBtn2');sb.disabled=true;sb2.disabled=true;sb.innerHTML='Submitting...';sb2.innerHTML='Submitting...';const fSV=v=>{v=parseInt(v);if(v<25)return"Strongly Left";if(v<45)return"Moderately Left";if(v<55)return"Balanced";if(v<75)return"Moderately Right";return"Strongly Right"};const gVS=()=>{const t=[];if(d.voiceTone>60)t.push("punchy and bold");else if(d.voiceTone<40)t.push("soft and gentle");if(d.personality>60)t.push("playful");else if(d.personality<40)t.push("serious and professional");if(d.formality>60)t.push("casual and conversational");else if(d.formality<40)t.push("formal and polished");if(d.emotion>60)t.push("emotionally driven");else if(d.emotion<40)t.push("logical and rational");if(d.complexity>60)t.push("sophisticated");else if(d.complexity<40)t.push("simple and clear");if(d.innovation>60)t.push("modern and cutting-edge");else if(d.innovation<40)t.push("traditional");if(d.approachability>60)t.push("accessible and inclusive");else if(d.approachability<40)t.push("exclusive and premium");if(d.energy>60)t.push("energetic and dynamic");else if(d.energy<40)t.push("calm and measured");if(t.length===0)return"This brand maintains a balanced, moderate approach across all voice attributes.";return`This brand voice is ${t.slice(0,-1).join(", ")}${t.length>1?", and "+t[t.length-1]:t[0]}.`};const gLS=()=>{const t=[];if(d.vocabulary>60)t.push("uses industry-specific jargon");else if(d.vocabulary<40)t.push("uses everyday language");if(d.sentenceLength>60)t.push("favors long, flowing sentences");else if(d.sentenceLength<40)t.push("uses short, snappy sentences");if(d.technicality>60)t.push("is technical and precise");else if(d.technicality<40)t.push("explains in layman's terms");if(d.storytelling>60)t.push("uses stories and narratives");else if(d.storytelling<40)t.push("focuses on facts and data");if(d.humor>60)t.push("incorporates wit and humor");else if(d.humor<40)t.push("maintains a serious tone");if(d.directness>60)t.push("communicates subtly and suggestively");else if(d.directness<40)t.push("is direct and clear");if(t.length===0)return"This brand uses a balanced language style across all attributes.";return`The language style ${t.slice(0,-1).join(", ")}${t.length>1?", and "+t[t.length-1]:t[0]}.`};const eD={brand_name:d.name||'Untitled',submission_date:new Date().toLocaleString(),voice_summary:gVS(),language_summary:gLS(),foundation_name:d.name||'N/A',foundation_tagline:d.tagline||'N/A',foundation_mission:d.mission||'N/A',foundation_vision:d.vision||'N/A',foundation_values:d.values||'N/A',audience_primary:d.primaryAudience||'N/A',audience_demographics:d.demographics||'N/A',audience_psychographics:d.psychographics||'N/A',audience_needs:d.customerNeeds||'N/A',market_category:d.category||'N/A',market_category_other:d.categoryOther||'',market_competitors:d.competitors||'N/A',market_differentiation:d.differentiation||'N/A',market_value_prop:d.valueProposition||'N/A',personality_archetype:d.archetype||'N/A',personality_archetype_other:d.archetypeOther||'',personality_human_traits:d.humanTraits||'N/A',personality_avoid_traits:d.avoidTraits||'N/A',visual_color:d.colorPreferences||'N/A',visual_style:d.visualStyle||'N/A',visual_style_other:d.visualStyleOther||'',visual_imagery:d.imagery||'N/A',visual_imagery_other:d.imageryOther||'',messaging_key_messages:d.keyMessages||'N/A',messaging_avoid:d.avoidLanguage||'N/A',voice_tone_value:d.voiceTone||50,voice_tone_label:fSV(d.voiceTone||50),voice_personality_value:d.personality||50,voice_personality_label:fSV(d.personality||50),voice_formality_value:d.formality||50,voice_formality_label:fSV(d.formality||50),voice_emotion_value:d.emotion||50,voice_emotion_label:fSV(d.emotion||50),voice_complexity_value:d.complexity||50,voice_complexity_label:fSV(d.complexity||50),voice_innovation_value:d.innovation||50,voice_innovation_label:fSV(d.innovation||50),voice_approachability_value:d.approachability||50,voice_approachability_label:fSV(d.approachability||50),voice_energy_value:d.energy||50,voice_energy_label:fSV(d.energy||50),lang_vocabulary_value:d.vocabulary||50,lang_vocabulary_label:fSV(d.vocabulary||50),lang_sentence_value:d.sentenceLength||50,lang_sentence_label:fSV(d.sentenceLength||50),lang_technicality_value:d.technicality||50,lang_technicality_label:fSV(d.technicality||50),lang_storytelling_value:d.storytelling||50,lang_storytelling_label:fSV(d.storytelling||50),lang_humor_value:d.humor||50,lang_humor_label:fSV(d.humor||50),lang_directness_value:d.directness||50,lang_directness_label:fSV(d.directness||50)};try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:'service_dg5e7ka',template_id:'template_h1pz9g3',user_id:'f1khU9n23hpADDU7G',template_params:eD})});if(r.ok){showAlert('Brand framework submitted successfully! Thank you.','success')}else{throw new Error('Failed to send')}}catch(error){showAlert('Failed to submit. Please try again or download and email the file.','error');console.error('EmailJS error:',error)}finally{sb.disabled=false;sb2.disabled=false;sb.innerHTML='Submit';sb2.innerHTML='Submit'}}function resetForm(){if(confirm('Are you sure you want to reset the form? All data will be lost.')){document.getElementById('brandForm').reset();document.querySelectorAll('.visual-option').forEach(el=>el.classList.remove('selected'));document.getElementById('visualStyleInput').value='';document.querySelectorAll('[id$="Other"]').forEach(el=>el.classList.add('hidden'));document.querySelectorAll('.slider-value').forEach(el=>el.textContent='Balanced');document.getElementById('alertContainer').innerHTML=''}}
+  </script>
+</body>
+</html>
