@@ -773,56 +773,74 @@
         brand_name: data.name || 'Untitled',
         submission_date: new Date().toLocaleString(),
         
-        foundation: `
-Brand Name: ${data.name || 'N/A'}
-Tagline: ${data.tagline || 'N/A'}
-Mission: ${data.mission || 'N/A'}
-Vision: ${data.vision || 'N/A'}
-Core Values: ${data.values || 'N/A'}`,
+        // Foundation
+        foundation_name: data.name || 'N/A',
+        foundation_tagline: data.tagline || 'N/A',
+        foundation_mission: data.mission || 'N/A',
+        foundation_vision: data.vision || 'N/A',
+        foundation_values: data.values || 'N/A',
 
-        audience: `
-Primary Audience: ${data.primaryAudience || 'N/A'}
-Demographics: ${data.demographics || 'N/A'}
-Psychographics: ${data.psychographics || 'N/A'}
-Customer Needs: ${data.customerNeeds || 'N/A'}`,
+        // Audience
+        audience_primary: data.primaryAudience || 'N/A',
+        audience_demographics: data.demographics || 'N/A',
+        audience_psychographics: data.psychographics || 'N/A',
+        audience_needs: data.customerNeeds || 'N/A',
 
-        market: `
-Category: ${data.category || 'N/A'}${data.categoryOther ? ` (${data.categoryOther})` : ''}
-Competitors: ${data.competitors || 'N/A'}
-Differentiation: ${data.differentiation || 'N/A'}
-Value Proposition: ${data.valueProposition || 'N/A'}`,
+        // Market
+        market_category: data.category || 'N/A',
+        market_category_other: data.categoryOther || '',
+        market_competitors: data.competitors || 'N/A',
+        market_differentiation: data.differentiation || 'N/A',
+        market_value_prop: data.valueProposition || 'N/A',
 
-        personality: `
-Archetype: ${data.archetype || 'N/A'}${data.archetypeOther ? ` (${data.archetypeOther})` : ''}
-Human Traits: ${data.humanTraits || 'N/A'}
-Avoid Traits: ${data.avoidTraits || 'N/A'}`,
+        // Personality
+        personality_archetype: data.archetype || 'N/A',
+        personality_archetype_other: data.archetypeOther || '',
+        personality_human_traits: data.humanTraits || 'N/A',
+        personality_avoid_traits: data.avoidTraits || 'N/A',
 
-        visual: `
-Color Direction: ${data.colorPreferences || 'N/A'}
-Visual Style: ${data.visualStyle || 'N/A'}${data.visualStyleOther ? ` (${data.visualStyleOther})` : ''}
-Imagery: ${data.imagery || 'N/A'}${data.imageryOther ? ` (${data.imageryOther})` : ''}`,
+        // Visual
+        visual_color: data.colorPreferences || 'N/A',
+        visual_style: data.visualStyle || 'N/A',
+        visual_style_other: data.visualStyleOther || '',
+        visual_imagery: data.imagery || 'N/A',
+        visual_imagery_other: data.imageryOther || '',
 
-        messaging: `
-Key Messages: ${data.keyMessages || 'N/A'}
-Avoid Language: ${data.avoidLanguage || 'N/A'}`,
+        // Messaging
+        messaging_key_messages: data.keyMessages || 'N/A',
+        messaging_avoid: data.avoidLanguage || 'N/A',
 
-        brand_voice: `
-Voice Tone: ${formatSliderValue(data.voiceTone || 50)} (Soft & Gentle ← ${data.voiceTone || 50} → Punchy & Bold)
-Personality: ${formatSliderValue(data.personality || 50)} (Serious & Professional ← ${data.personality || 50} → Playful & Witty)
-Formality: ${formatSliderValue(data.formality || 50)} (Formal & Polished ← ${data.formality || 50} → Casual & Conversational)
-Emotional Appeal: ${formatSliderValue(data.emotion || 50)} (Logical & Rational ← ${data.emotion || 50} → Emotional & Heartfelt)
-Complexity: ${formatSliderValue(data.complexity || 50)} (Simple & Clear ← ${data.complexity || 50} → Sophisticated & Nuanced)
-Innovation: ${formatSliderValue(data.innovation || 50)} (Traditional & Classic ← ${data.innovation || 50} → Modern & Cutting-Edge)
-Approachability: ${formatSliderValue(data.approachability || 50)} (Exclusive & Premium ← ${data.approachability || 50} → Accessible & Inclusive)
-Energy Level: ${formatSliderValue(data.energy || 50)} (Calm & Measured ← ${data.energy || 50} → Energetic & Dynamic)`,
+        // Brand Voice Sliders
+        voice_tone_value: data.voiceTone || 50,
+        voice_tone_label: formatSliderValue(data.voiceTone || 50),
+        voice_personality_value: data.personality || 50,
+        voice_personality_label: formatSliderValue(data.personality || 50),
+        voice_formality_value: data.formality || 50,
+        voice_formality_label: formatSliderValue(data.formality || 50),
+        voice_emotion_value: data.emotion || 50,
+        voice_emotion_label: formatSliderValue(data.emotion || 50),
+        voice_complexity_value: data.complexity || 50,
+        voice_complexity_label: formatSliderValue(data.complexity || 50),
+        voice_innovation_value: data.innovation || 50,
+        voice_innovation_label: formatSliderValue(data.innovation || 50),
+        voice_approachability_value: data.approachability || 50,
+        voice_approachability_label: formatSliderValue(data.approachability || 50),
+        voice_energy_value: data.energy || 50,
+        voice_energy_label: formatSliderValue(data.energy || 50),
 
-        language_style: `
-Vocabulary: ${formatSliderValue(data.vocabulary || 50)} (Everyday Words ← ${data.vocabulary || 50} → Industry Jargon)
-Sentence Length: ${formatSliderValue(data.sentenceLength || 50)} (Short & Snappy ← ${data.sentenceLength || 50} → Long & Flowing)
-Technicality: ${formatSliderValue(data.technicality || 50)} (Layman's Terms ← ${data.technicality || 50} → Technical & Precise)
-Storytelling: ${formatSliderValue(data.storytelling || 50)} (Facts & Data ← ${data.storytelling || 50} → Stories & Narratives)
-Humor: ${formatSliderValue(data.humor || 50)} (Serious & Straight ← ${data.humor || 50} → Witty & Humorous)
-Directness: ${formatSliderValue(data.directness || 50)} (Direct & Clear ← ${data.directness || 50} → Suggestive & Subtle)`
+        // Language Style Sliders
+        lang_vocabulary_value: data.vocabulary || 50,
+        lang_vocabulary_label: formatSliderValue(data.vocabulary || 50),
+        lang_sentence_value: data.sentenceLength || 50,
+        lang_sentence_label: formatSliderValue(data.sentenceLength || 50),
+        lang_technicality_value: data.technicality || 50,
+        lang_technicality_label: formatSliderValue(data.technicality || 50),
+        lang_storytelling_value: data.storytelling || 50,
+        lang_storytelling_label: formatSliderValue(data.storytelling || 50),
+        lang_humor_value: data.humor || 50,
+        lang_humor_label: formatSliderValue(data.humor || 50),
+        lang_directness_value: data.directness || 50,
+        lang_directness_label: formatSliderValue(data.directness || 50)
       };
 
       try {
